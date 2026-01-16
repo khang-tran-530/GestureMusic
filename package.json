@@ -1,0 +1,20 @@
+{
+  "name": "gesuremusic",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.10"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "^0.10.22-rc.20250304"
+  },
+    "overrides": {
+      "esbuild": "^0.25.0"
+    }
+}
