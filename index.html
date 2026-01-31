@@ -8,10 +8,39 @@
 
   <body>
     <div id="app">
-      <h1>GestureMusic - Webcam</h1>
+
+      <!-- Nav Bar -->
+      <header class="topbar">
+        <div class="topbar__left">
+          <div class="brand">GestureMusic</div>
+        </div>
+      
+        <div class="topbar__right">
+          <!-- Spy class circle icon (placeholder) -->
+          <button class="icon-btn" aria-label="Spy class">
+            <span class="icon-dot"></span>
+          </button>
+      
+          <!-- Profile circle (placeholder for PNG later) -->
+          <button class="avatar" aria-label="Profile"></button>
+        </div>
+      </header>
+      
 
       <button id="startBtn">Start webcam</button>
       <span id="status">idle</span>
+
+      <div class="carousel-wrap">
+        <div id="carousel" class="carousel" aria-label="Album carousel"></div>
+      
+        <div class="selected-info">
+          <div id="selTitle" class="sel-title">Album Title</div>
+          <div id="selArtist" class="sel-artist">Artist</div>
+        </div>
+      
+        <p class="hint">Use ← and → to change albums (Enter = switch Albums/Tracks for testing)</p>
+      </div>
+      
 
       <div style="position: relative; width: 640px; max-width: 95vw;">
         <video

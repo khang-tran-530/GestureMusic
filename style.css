@@ -1,17 +1,124 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif, -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+  "Helvetica Neue", Arial, system-ui, sans-serif;;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  color-scheme: dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Top bar */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 20px;
+  z-index: 1000;
+
+  /* Glassy look */
+  background: rgba(5, 11, 20, 0.55);
+  backdrop-filter: blur(50%);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand {
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  text-align: left;
+}
+
+/* Right side icons */
+.topbar__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Generic circular icon button */
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+
+  display: grid;
+  place-items: center;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.09);
+}
+
+/* Placeholder “spy class” dot icon */
+.icon-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Avatar placeholder */
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  cursor: pointer;
+}
+
+/* Avatar picture*/
+.avatar {
+  background-image: url("/profile.png");
+  background-size: cover;
+  background-position: center;
+}
+
+
+body {
+  margin: 0;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      ellipse 110% 110% at top right,
+      #122840 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 100% 100% at bottom left,
+      #122840 0%,
+      transparent 60%
+    ),
+    #050b14; /* base color */
+
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  display: flex;
+  place-items: center;
+}
+
 
 a {
   font-weight: 500;
@@ -22,14 +129,6 @@ a:hover {
   color: #535bf2;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -38,9 +137,10 @@ h1 {
 #app {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 5.25rem 2rem 2rem; /* top padding gives space for navbar */
   text-align: center;
 }
+
 
 .logo {
   height: 6em;
@@ -97,4 +197,95 @@ button:focus-visible {
 
 #video, #overlay {
   display: block;
+}
+
+.carousel-wrap {
+  width: 900px;
+  max-width: 95vw;
+  margin: 24px auto 8px;
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 360px; /* extra vertical space for “arc” */
+  outline: none;
+  perspective: 900px; /* helps if you later add rotateY */
+}
+
+/* 7 persistent cards */
+.carousel-card {
+  position: absolute;
+  left: 50%;
+  top: 40px; /* baseline for the arc */
+  width: 200px;
+  height: 240px;
+
+  border-radius: 22px;
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 18px 55px rgba(0,0,0,0.38);
+
+  transform: translateX(-50%);
+  transform-style: preserve-3d;
+  user-select: none;
+
+  transition:
+    transform 280ms cubic-bezier(.2,.9,.2,1),
+    opacity 280ms cubic-bezier(.2,.9,.2,1),
+    filter 280ms cubic-bezier(.2,.9,.2,1);
+}
+
+.carousel-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* subtle top-to-bottom shading for depth */
+.carousel-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.38), rgba(0,0,0,0) 55%);
+  pointer-events: none;
+}
+
+.selected-info {
+  text-align: center;
+  margin-top: -8px; /* pulls text closer to the center card */
+}
+
+.sel-title {
+  font-size: 2.6rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+}
+
+.sel-artist {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  opacity: 0.78;
+}
+
+/* Smooth fade when switching Albums <-> Tracks */
+.carousel.is-switching .carousel-card {
+  opacity: 0;
+  transform: translateX(-50%) translateY(12px) scale(0.98);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.carousel-card.no-trans { 
+  transition: none !important; 
+}
+
+
+.hint {
+  opacity: 0.7;
+  font-size: 0.95em;
+  margin-top: 0;
 }
