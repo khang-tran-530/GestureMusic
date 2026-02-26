@@ -15,12 +15,33 @@
 
 /*Gallery stuff*/
 
-#oglGallery { height: 420px; }
+.page {
+  padding-top: 64px; /* account for fixed navbar */
+}
+
+.container {
+  width: min(1280px, 100%);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* full-bleed section */
+.gallery-section {
+  width: 100%;
+  margin: 24px 0;
+}
+
+/* the WebGL container is full screen width */
+#oglGallery {
+  width: 100%;
+  height: 65vh;   /* or 420px */
+}
 
 .gallery-wrap {
-  width: 900px;
-  max-width: 95vw;
-  margin: 24px auto 8px;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);  /* break out of centered container */
+  margin-right: calc(50% - 50vw);
+  margin-top: 24px;
 }
 
 /* Top bar */
@@ -40,7 +61,7 @@
 
   /* Glassy look */
   background: rgba(5, 11, 20, 0.55);
-  backdrop-filter: blur(50%); /* percentage or px???!!!!!!!!!!!!!!????????????????????????!!!!!!!!!!!!!!!!!!!!! */
+  backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -142,9 +163,9 @@ h1 {
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 5.25rem 2rem 2rem; /* top padding gives space for navbar */
+  width: 100%;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 

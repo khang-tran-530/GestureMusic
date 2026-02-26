@@ -8,10 +8,9 @@
 
   <body>
     <div id="app">
-
       <!-- Nav Bar -->
-      <header class="topbar">
-        <div class="topbar__left">
+    <header class="topbar">
+      <div class="topbar__left">
           <div class="brand">GestureMusic</div>
         </div>
       
@@ -23,52 +22,34 @@
       
           <!-- Profile circle (placeholder for PNG later) -->
           <button class="avatar" aria-label="Profile"></button>
+
+          <button id="startBtn">Start webcam</button>
+          <span id="status">idle</span>
         </div>
-      </header>
-      
+    </header>
 
-      <button id="startBtn">Start webcam</button>
-      <span id="status">idle</span>
 
-    <!--
-      <div class="carousel-wrap">
-        <div id="carousel" class="carousel" aria-label="Album carousel"></div>
-      
-        <div class="selected-info">
-          <div id="selTitle" class="sel-title">Album Title</div>
-          <div id="selArtist" class="sel-artist">Artist</div>
-        </div>
-      
-        <p class="hint">Use ← and → to change albums (Enter = switch Albums/Tracks for testing)</p>
-      </div>
-      -->
+    <main class="page">
 
-      <div class = "gallery-wrap">
+      <section class="gallery-section">
         <div id="oglGallery" class="circular-gallery"></div>
 
-        <div class="selected-info">
-          <div id="selTitle" class="sel-title">Album Title</div>
-          <div id="selArtist" class="sel-artist">Artist</div>
+        <!-- <div class="container">
+           <div class="selected-info">
+            <div id="selTitle" class="sel-title">Album Title</div>
+            <div id="selArtist" class="sel-artist">Artist</div>
+          </div>
+          <p class="hint">Scroll/drag to browse • (Later: gestures)</p>
+        </div> -->
+      </section>
+
+      <div class="container">
+        <div style="position: relative; width: 640px; max-width: 95vw;">
+          <video id="video" autoplay playsinline style="width:100%; transform:scaleX(-1);"></video>
+          <canvas id="overlay" style="position:absolute; inset:0; width:100%; height:100%; pointer-events:none; transform:scaleX(-1);"></canvas>
         </div>
-
-        <p class="hint">Scroll/drag to browse • (Later: gestures)</p>
       </div>
-
-      <div style="position: relative; width: 640px; max-width: 95vw;">
-        <video
-          id="video"
-          autoplay
-          playsinline
-          style="width: 100%; height: auto; transform: scaleX(-1);"
-        ></video>
-
-        <!-- Overlay is mirrored too so landmarks line up with the mirrored video -->
-        <canvas
-          id="overlay"
-          style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; transform: scaleX(-1);"
-        ></canvas>
-      </div>
-    </div>
+    </main>
 
     <script type="module" src="/main.js"></script>
   </body>
