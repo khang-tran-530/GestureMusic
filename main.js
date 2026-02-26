@@ -44,7 +44,7 @@ const songs = [
     cover: "./src/covers/frank-ocean-blonde-album-cover.jpg"
   },
   {
-    title: "The Blue One",
+    title: "Nothing But The Best",
     artist: "Frank Sinatra",
     cover: "./src/covers/frank-sinatra.jpg"
   },
@@ -53,10 +53,18 @@ const songs = [
     artist: "Bruno Mars & Anderson .Paak",
     cover: "./src/covers/Silk-Sonic.webp"
   },
+  {
+    title: "Long Live Asap",
+    artist: "Asap Rocky",
+    cover: "./src/covers/longliveasap.jpg"
+  },
 ];
 
 
 // OGL Gallery
+const items = songs.map(s => ({ image: s.cover, text: s.title }));
+console.log(items);
+
 const gallery = createCircularGallery(galleryEl, {
   items: songs.map(s => ({
     image: s.cover,
@@ -64,6 +72,8 @@ const gallery = createCircularGallery(galleryEl, {
   })),
   bend: 3,
   borderRadius: 0.05,
+  font: '200 20px Inter',
+  textColor: '#ffffff',
 });
 
 
