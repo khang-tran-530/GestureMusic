@@ -18,15 +18,19 @@ if (!galleryEl) { //just to make sure the element exists before we try to use it
   throw new Error("#oglGallery not found in HTML");
 }
 
+const cameraWindow = document.getElementById("cameraWindow");
+if (!cameraWindow) throw new Error("#cameraWindow not found in HTML");
+
 let stream = null;
 let rafId = null;
+
 
 // MediaPipe
 let handLandmarker = null;
 let drawingUtils = null;
 let lastVideoTime = -1;
 
-// Hard-coded data for now
+// Hard-coded song data - in a real app, this would likely come from an API or database
 const songs = [
   {
     title: "Currents",
@@ -149,6 +153,7 @@ function stopDetectionLoop() {
 }
 
 async function startWebcam() {
+  
   try {
     setStatus("requesting camera permission...");
 
@@ -158,6 +163,7 @@ async function startWebcam() {
     });
 
     video.srcObject = stream;
+    cameraWindow.classList.remove("is-hidden");
 
     video.addEventListener(
       "loadeddata",
@@ -173,6 +179,7 @@ async function startWebcam() {
     );
   } catch (err) {
     console.error(err);
+    cameraWindow.classList.add("is-hidden");
     setStatus(`error: ${err.name}`);
     alert(
       `Could not start webcam.\n\nError: ${err.name}\n\n` +
@@ -196,6 +203,7 @@ function stopWebcam() {
 
   startBtn.textContent = "Start webcam";
   setStatus("idle");
+  cameraWindow.classList.add("is-hidden");
 }
 
 startBtn.addEventListener("click", () => {
