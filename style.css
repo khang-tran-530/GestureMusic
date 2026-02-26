@@ -13,6 +13,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/*Gallery stuff*/
+
+#oglGallery { height: 420px; }
+
+.gallery-wrap {
+  width: 900px;
+  max-width: 95vw;
+  margin: 24px auto 8px;
+}
+
 /* Top bar */
 .topbar {
   position: fixed;
@@ -30,7 +40,7 @@
 
   /* Glassy look */
   background: rgba(5, 11, 20, 0.55);
-  backdrop-filter: blur(50%);
+  backdrop-filter: blur(50%); /* percentage or px???!!!!!!!!!!!!!!????????????????????????!!!!!!!!!!!!!!!!!!!!! */
   -webkit-backdrop-filter: blur(14px);
 
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -114,9 +124,6 @@ body {
 
   background-repeat: no-repeat;
   background-attachment: fixed;
-
-  display: flex;
-  place-items: center;
 }
 
 

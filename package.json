@@ -12,9 +12,10 @@
     "vite": "^5.4.10"
   },
   "dependencies": {
-    "@mediapipe/tasks-vision": "^0.10.22-rc.20250304"
+    "@mediapipe/tasks-vision": "^0.10.22-rc.20250304",
+    "ogl": "^1.0.11"
   },
-    "overrides": {
-      "esbuild": "^0.25.0"
-    }
+  "overrides": {
+    "esbuild": "^0.25.0"
+  }
 }

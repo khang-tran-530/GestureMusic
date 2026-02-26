@@ -30,6 +30,7 @@
       <button id="startBtn">Start webcam</button>
       <span id="status">idle</span>
 
+    <!--
       <div class="carousel-wrap">
         <div id="carousel" class="carousel" aria-label="Album carousel"></div>
       
@@ -40,7 +41,18 @@
       
         <p class="hint">Use ← and → to change albums (Enter = switch Albums/Tracks for testing)</p>
       </div>
-      
+      -->
+
+      <div class = "gallery-wrap">
+        <div id="oglGallery" class="circular-gallery"></div>
+
+        <div class="selected-info">
+          <div id="selTitle" class="sel-title">Album Title</div>
+          <div id="selArtist" class="sel-artist">Artist</div>
+        </div>
+
+        <p class="hint">Scroll/drag to browse • (Later: gestures)</p>
+      </div>
 
       <div style="position: relative; width: 640px; max-width: 95vw;">
         <video

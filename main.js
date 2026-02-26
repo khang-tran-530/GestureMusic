@@ -4,12 +4,19 @@ import {
   HandLandmarker,
   DrawingUtils,
 } from "@mediapipe/tasks-vision";
+import { createCircularGallery } from './src/ui/CircularGalleryOGL.js';
+import './src/ui/circularGallery.css';
 
-const startBtn = document.getElementById("startBtn");
+const startBtn = document.getElementById("startBtn"); //document refers to the HTML document that calls this script
 const statusEl = document.getElementById("status");
 const video = document.getElementById("video");
 const overlay = document.getElementById("overlay");
 const overlayCtx = overlay.getContext("2d");
+
+const galleryEl = document.querySelector('#oglGallery');
+if (!galleryEl) { //just to make sure the element exists before we try to use it
+  throw new Error("#oglGallery not found in HTML");
+}
 
 let stream = null;
 let rafId = null;
@@ -18,32 +25,6 @@ let rafId = null;
 let handLandmarker = null;
 let drawingUtils = null;
 let lastVideoTime = -1;
-
-// ===== 7-card Arc Carousel with Smooth Slide Transitions =====
-const carouselEl = document.getElementById("carousel");
-const selTitleEl = document.getElementById("selTitle");
-const selArtistEl = document.getElementById("selArtist");
-
-// 7 total: 3 left + center + 3 right
-const VISIBLE = 3;
-const CARD_COUNT = VISIBLE * 2 + 1;
-
-// Arc tuning (these matter a lot for “circular band” feel)
-const ANGLE_STEP = 0.28; // radians per step (smaller = flatter)
-const RADIUS_X = 520;    // horizontal radius
-const RADIUS_Y = 150;    // vertical radius (higher = more arc)
-const CENTER_DROP = 38;  // center sits lower
-const CENTER_SCALE = 1.15; // scale of center card
-
-// Depth tuning
-const SCALE_MIN = 0.78;  // scale at the edges
-const OPACITY_MIN = 0.25;
-const BLUR_MAX = 1.8;
-
-const SLIDE_MS = 280;    // should match your CSS transition duration
-
-// Mode switching later (albums -> tracks). For now you can test with Enter.
-let mode = "albums"; // "albums" | "tracks"
 
 // Hard-coded data for now
 const albums = [
@@ -80,6 +61,34 @@ const albums = [
   { id: "a6", title: "Album Six", artist: "Artist F", cover: "https://picsum.photos/700?6", tracks: [] },
   { id: "a7", title: "Album Seven", artist: "Artist G", cover: "https://picsum.photos/700?7", tracks: [] },
 ];
+
+/* 
+// ===== 7-card Arc Carousel with Smooth Slide Transitions =====
+const carouselEl = document.getElementById("carousel");
+const selTitleEl = document.getElementById("selTitle");
+const selArtistEl = document.getElementById("selArtist");
+
+// 7 total: 3 left + center + 3 right
+const VISIBLE = 3;
+const CARD_COUNT = VISIBLE * 2 + 1;
+
+// Arc tuning (these matter a lot for “circular band” feel)
+const ANGLE_STEP = 0.28; // radians per step (smaller = flatter)
+const RADIUS_X = 520;    // horizontal radius
+const RADIUS_Y = 150;    // vertical radius (higher = more arc)
+const CENTER_DROP = 38;  // center sits lower
+const CENTER_SCALE = 1.15; // scale of center card
+
+// Depth tuning
+const SCALE_MIN = 0.78;  // scale at the edges
+const OPACITY_MIN = 0.25;
+const BLUR_MAX = 1.8;
+
+const SLIDE_MS = 280;    // should match your CSS transition duration
+
+// Mode switching later (albums -> tracks). For now you can test with Enter.
+let mode = "albums"; // "albums" | "tracks"
+
 
 let selectedAlbumIndex = 0;
 let selectedTrackIndex = 0;
@@ -345,6 +354,18 @@ window.addEventListener("keydown", (e) => {
 // Init
 initCarouselDOM();
 setCardPositionsAndContent();
+*/
+
+// OGL Gallery
+const gallery = createCircularGallery(galleryEl, {
+  items: albums.map(a => ({
+    image: a.cover,
+    text: a.title,
+  })),
+  bend: 3,
+  borderRadius: 0.05,
+});
+
 
 function setStatus(msg) {
   statusEl.textContent = msg;
