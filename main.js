@@ -34,6 +34,8 @@ const gallery = createCircularGallery(galleryEl, {
   textColor: "#ffffff",
 });
 
+window.gallery = gallery; // expose gallery to website console for debugging
+
 // Hand tracking controller
 const handTracking = createHandTrackingController({
   videoEl: video,
@@ -41,10 +43,10 @@ const handTracking = createHandTrackingController({
   statusEl,
   cameraWindowEl: cameraWindow,
   draw: true, // keep drawing landmarks like before
-  onResults: (results) => {
-    // Later: use landmarks to control gallery
-    // e.g. pinch -> next/prev, open palm -> play/pause, etc.
-    // console.log(results);
+  onResults: (results, gestureInfo) => {
+    if (!gestureInfo?.swipe) return;
+    if (gestureInfo.swipe === "right") gallery.next();
+    if (gestureInfo.swipe === "left")  gallery.prev();
   },
 });
 

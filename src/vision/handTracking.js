@@ -19,7 +19,7 @@ import {
     modelAssetPath = "/models/hand_landmarker.task",
     wasmRoot = "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.22-rc.20250304/wasm",
     numHands = 1,
-    delegate = "CPU",
+    delegate = "GPU",
     videoConstraints = { width: { ideal: 640 }, height: { ideal: 480 } },
     draw = true,
     onResults = null, // (results) => void
