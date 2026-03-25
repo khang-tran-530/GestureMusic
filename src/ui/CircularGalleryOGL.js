@@ -456,43 +456,42 @@ class App {
 
 //-----------------------------------//
 
-function getCurrentIndex(app){
-  if(!app.medias || !app.nedias [0]){  
-    return 0;                                             //if there is nothing in the gallery, return 0 as default index
+function getCurrentIndex(app) {
+  if (!app.medias || !app.medias[0]) {
+    return 0;
   }
 
-  const width = app.medias[0].width;                      // distance between one album and the next in scroll units, ie step size
-  return Math.round(Math.abs(app.scroll.target) / width); // calculate the current index based on the scroll target and step size
+  const width = app.medias[0].width;
+  return Math.round(Math.abs(app.scroll.target) / width);
 }
 
-function goToIndex(app, index){
-  if(!app.medias || !app.nedias [0]){ 
-    return;                                               //if there is nothing in the gallery, return
+function goToIndex(app, index) {
+  if (!app.medias || !app.medias[0]) {
+    return;
   }
 
-  const width = app.media[0].width;                       //distance of one album
-  const sign = app.scroll.target < 0 ? -1 : 1; 
+  const width = app.medias[0].width;
+  const sign = app.scroll.target < 0 ? -1 : 1;
 
   app.scroll.target = sign * (index * width);
-  app.onCheck();                                          // snap to the closest item after setting the target
+  app.onCheck();
 }
 
-function goNext(app){
+function goNext(app) {
   const current = getCurrentIndex(app);
   goToIndex(app, current + 1);
 }
 
-function goPrev(app){
+function goPrev(app) {
   const current = getCurrentIndex(app);
   goToIndex(app, current - 1);
 }
 
 export function createCircularGallery(container, options = {}) {
   const app = new App(container, options);
-  return { //exposes .destroy, .next, and .prev methods for external control of the gallery
+  return {
     destroy: () => app.destroy(),
-    app, // still exposed for debugging
-
+    app,
     next: () => goNext(app),
     prev: () => goPrev(app),
   };
